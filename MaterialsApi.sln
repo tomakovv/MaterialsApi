@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MaterialsApi", "src\MaterialsApi\MaterialsApi.csproj", "{72D25298-4B3E-46DE-AABD-32A516C8A74E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{72D25298-4B3E-46DE-AABD-32A516C8A74E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72D25298-4B3E-46DE-AABD-32A516C8A74E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72D25298-4B3E-46DE-AABD-32A516C8A74E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72D25298-4B3E-46DE-AABD-32A516C8A74E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5C6F2C4E-671C-4DCB-8CE5-E8AB48A8AE89}
+	EndGlobalSection
+EndGlobal
