@@ -5,6 +5,8 @@ VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MaterialsApi", "src\MaterialsApi\MaterialsApi.csproj", "{72D25298-4B3E-46DE-AABD-32A516C8A74E}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MaterialsApi.Data", "src\MaterialApi.Data\MaterialsApi.Data.csproj", "{702DAB63-BDEF-4BB9-B135-A7153FF93BC6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{72D25298-4B3E-46DE-AABD-32A516C8A74E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{72D25298-4B3E-46DE-AABD-32A516C8A74E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{72D25298-4B3E-46DE-AABD-32A516C8A74E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{702DAB63-BDEF-4BB9-B135-A7153FF93BC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{702DAB63-BDEF-4BB9-B135-A7153FF93BC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{702DAB63-BDEF-4BB9-B135-A7153FF93BC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{702DAB63-BDEF-4BB9-B135-A7153FF93BC6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
