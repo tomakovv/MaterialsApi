@@ -6,6 +6,6 @@
         public string Name { get; set; }
         public string Description { get; set; }
         public IEnumerable<Material> CreatedMaterials { get; set; } = new List<Material>();
-        public int NumberOfCreatedMaterials { get; set; }
+        public int NumberOfCreatedMaterials => CreatedMaterials.Count();
     }
 }
