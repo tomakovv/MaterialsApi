@@ -1,16 +1,25 @@
-﻿namespace MaterialsApi.Data.Entities
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace MaterialsApi.DTO.Materials
 {
-    public class Material
+    public class AddMaterialDto
     {
-        public int Id { get; set; }
+        [Required]
         public string Title { get; set; }
+
+        [Required]
         public string Description { get; set; }
+
+        [Required]
         public string Location { get; set; }
+
+        [Required]
         public int AuthorId { get; set; }
-        public Author? Author { get; set; }
+
+        [Required]
         public int TypeId { get; set; }
-        public MaterialType? Type { get; set; }
+
+        [Required]
         public DateTime PublishDate { get; set; }
-        public IEnumerable<Review>? Reviews { get; set; } = new List<Review>();
     }
 }

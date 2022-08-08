@@ -16,21 +16,22 @@ namespace MaterialsApi.Data.DAL.Repositories
 
         public IQueryable<T> GetAllAsync() => _context.Set<T>().AsNoTracking();
 
-        public IQueryable<T> GetByCondition(Expression<Func<T, bool>> expression) => _context.Set<T>().Where(expression).AsNoTracking();
+        public async Task<T> GetSingleByConditionAsync(Expression<Func<T, bool>> expression) => await _context.Set<T>().AsNoTracking().SingleOrDefaultAsync(expression);
 
-        public async Task Create(T entity)
+        public async Task<T> CreateAsync(T entity)
         {
-            await _context.Set<T>().AddAsync(entity);
+            var addedElement = await _context.Set<T>().AddAsync(entity);
             await _context.SaveChangesAsync();
+            return addedElement.Entity;
         }
 
-        public async Task Update(T entity)
+        public async Task UpdateAsync(T entity)
         {
             _context.Set<T>().Update(entity);
             await _context.SaveChangesAsync();
         }
 
-        public async Task Delete(T entity)
+        public async Task DeleteAsync(T entity)
         {
             _context.Set<T>().Remove(entity);
             await _context.SaveChangesAsync();

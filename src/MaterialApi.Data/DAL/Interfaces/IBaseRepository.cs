@@ -4,10 +4,14 @@ namespace MaterialsApi.Data.DAL.Interfaces
 {
     public interface IBaseRepository<T> where T : class
     {
-        Task Create(T entity);
-        Task Delete(T entity);
+        Task<T> CreateAsync(T entity);
+
+        Task DeleteAsync(T entity);
+
         IQueryable<T> GetAllAsync();
-        IQueryable<T> GetByCondition(Expression<Func<T, bool>> expression);
-        Task Update(T entity);
+
+        Task<T> GetSingleByConditionAsync(Expression<Func<T, bool>> expression);
+
+        Task UpdateAsync(T entity);
     }
 }

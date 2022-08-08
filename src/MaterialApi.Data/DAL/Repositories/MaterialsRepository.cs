@@ -1,11 +1,8 @@
 ﻿using MaterialsApi.Data.Context;
 using MaterialsApi.Data.DAL.Interfaces;
 using MaterialsApi.Data.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace MaterialsApi.Data.DAL.Repositories
 {
@@ -17,5 +14,15 @@ namespace MaterialsApi.Data.DAL.Repositories
         {
             _context = context;
         }
+
+        public async Task<IEnumerable<Material>> GetAllWithMembersAsync() => await _context.Materials
+            .Include(m => m.Author)
+            .Include(m => m.Reviews)
+            .Include(m => m.Type).ToListAsync();
+
+        public async Task<Material> GetByConditionWithMembersAsync(Expression<Func<Material, bool>> expression) => await _context.Materials
+            .Include(m => m.Author)
+            .Include(m => m.Reviews)
+            .Include(m => m.Type).SingleOrDefaultAsync(expression);
     }
 }
