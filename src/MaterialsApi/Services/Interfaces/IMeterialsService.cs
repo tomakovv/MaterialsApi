@@ -6,6 +6,10 @@ namespace MaterialsApi.Services.Interfaces
     {
         Task<MaterialDto> AddMaterialAsync(AddMaterialDto materialDto);
 
+        Task DeleteMaterialAsync(int id);
+
+        Task EditMaterialAsync(int id, AddMaterialDto materialDto);
+
         Task<IEnumerable<MaterialDto>> GetAllAsync();
 
         Task<MaterialDto> GetByIdAsync(int id);

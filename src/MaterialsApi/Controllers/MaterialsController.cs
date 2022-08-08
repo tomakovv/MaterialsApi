@@ -34,16 +34,20 @@ namespace MaterialsApi.Controllers
             return Created($"api/Materials/{addedMaterial.Id}", addedMaterial);
         }
 
-        // PUT api/<MaterialsController>/5
+        [SwaggerOperation(Summary = "Update specific material")]
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<IActionResult> EditAsync(int id, AddMaterialDto editMaterial)
         {
+            await _meterialsService.EditMaterialAsync(id, editMaterial);
+            return NoContent();
         }
 
-        // DELETE api/<MaterialsController>/5
+        [SwaggerOperation(Summary = "Delete specific material")]
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> DeleteAsync(int id)
         {
+            await _meterialsService.DeleteMaterialAsync(id);
+            return NoContent();
         }
     }
 }

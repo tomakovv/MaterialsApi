@@ -44,10 +44,32 @@ namespace MaterialsApi.Services
                 throw new BadRequestException("Invalid material type Id");
             if (await _authorRepository.GetSingleByConditionAsync(m => m.Id == materialDto.AuthorId) == null)
                 throw new BadRequestException("Invalid author Id");
-
             var newMaterial = _mapper.Map<Material>(materialDto);
             var addedMaterial = await _materialsRepository.CreateAsync(newMaterial);
             return _mapper.Map<MaterialDto>(addedMaterial);
+        }
+
+        public async Task EditMaterialAsync(int id, AddMaterialDto materialDto)
+        {
+            var material = await _materialsRepository.GetByConditionWithMembersAsync(m => m.Id == id);
+            if (material == null)
+                throw new BadRequestException("Material with provided Id does not exist");
+            if (string.IsNullOrWhiteSpace(materialDto.Description) || string.IsNullOrWhiteSpace(materialDto.Location) || string.IsNullOrWhiteSpace(materialDto.Title))
+                throw new BadRequestException("one of parameters was invalid");
+            if (await _materialTypesRepository.GetSingleByConditionAsync(m => m.Id == materialDto.TypeId) == null)
+                throw new BadRequestException("Invalid material type Id");
+            if (await _authorRepository.GetSingleByConditionAsync(m => m.Id == materialDto.AuthorId) == null)
+                throw new BadRequestException("Invalid author Id");
+            var editedMaterial = _mapper.Map(materialDto, material);
+            await _materialsRepository.UpdateAsync(editedMaterial);
+        }
+
+        public async Task DeleteMaterialAsync(int id)
+        {
+            var material = await _materialsRepository.GetByConditionWithMembersAsync(m => m.Id == id);
+            if (material == null)
+                throw new NotFoundException("Material with provided Id does not exist");
+            _materialsRepository.DeleteAsync(material);
         }
     }
 }
