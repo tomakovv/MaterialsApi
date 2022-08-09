@@ -13,6 +13,9 @@ builder.Services.AddAutoMapper(typeof(MaterialsProfile));
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddCustomSwagger();
+builder.Services.AddCustomAuthentication(builder.Configuration);
+builder.Services.AddAuthorization();
 
 var app = builder.Build();
 app.UseMiddleware<ErrorMiddleware>();
@@ -23,9 +26,7 @@ if (app.Environment.IsDevelopment())
 }
 app.UseCors("default");
 app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();
