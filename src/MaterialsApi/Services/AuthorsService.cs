@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MaterialsApi.Data.DAL.Interfaces;
 using MaterialsApi.DTO.Author;
+using MaterialsApi.DTO.Materials;
 using MaterialsApi.Exceptions;
 using MaterialsApi.Services.Interfaces;
 
@@ -35,13 +36,12 @@ namespace MaterialsApi.Services
             return _mapper.Map<AuthorDto>(author);
         }
 
-        public async Task<IEnumerable<AuthorDto>> GetTopRatedMaterialsAsync(int authorId)
+        public async Task<IEnumerable<MaterialDto>> GetTopRatedMaterialsAsync(int authorId)
         {
-            throw new NotImplementedException();
             var author = await _authorRepository.GetSingleByParameterWithMembersAsync(a => a.Id == authorId);
+            var materials = author.CreatedMaterials.Where(m => m.Reviews != null && m.Reviews.Any() && m.Reviews.Average(r => r.NumericRating) > 5).ToList();
             _logger.LogInformation($"top rated materials from author of id:{authorId} successfully fetched");
-
-            //author.CreatedMaterials.
+            return _mapper.Map<IEnumerable<MaterialDto>>(materials);
         }
 
         public async Task<AuthorDto> GetMostProductiveAuthorAsync()

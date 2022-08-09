@@ -31,7 +31,7 @@ namespace MaterialsApi.Controllers
         [SwaggerOperation(Summary = "Get all material from specified author with avg rating above 5")]
         [HttpGet("{id}/topRated")]
         [Authorize(Roles = UserRoles.Admin)]
-        public async Task<IActionResult> GetTopRatedMateerialsAsync(int id) => throw new NotImplementedException();
+        public async Task<IActionResult> GetTopRatedMateerialsAsync(int id) => Ok(await _authorsService.GetTopRatedMaterialsAsync(id));
 
         [SwaggerOperation(Summary = "Get most productive author")]
         [Authorize(Roles = UserRoles.Admin)]

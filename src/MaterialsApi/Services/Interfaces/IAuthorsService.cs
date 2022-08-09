@@ -1,4 +1,5 @@
 ﻿using MaterialsApi.DTO.Author;
+using MaterialsApi.DTO.Materials;
 
 namespace MaterialsApi.Services.Interfaces
 {
@@ -10,6 +11,6 @@ namespace MaterialsApi.Services.Interfaces
 
         Task<AuthorDto> GetMostProductiveAuthorAsync();
 
-        Task<IEnumerable<AuthorDto>> GetTopRatedMaterialsAsync(int authorId);
+        Task<IEnumerable<MaterialDto>> GetTopRatedMaterialsAsync(int authorId);
     }
 }
