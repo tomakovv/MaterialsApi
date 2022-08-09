@@ -24,5 +24,12 @@ namespace MaterialsApi.Extensions
             services.AddScoped<IMaterialTypesService, MaterialTypesService>();
             services.AddScoped<IReviewService, ReviewService>();
         }
+
+        public static void AddCustomCors(this IServiceCollection services)
+        {
+            services.AddCors(p => p.AddPolicy("default", builder =>
+            builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()
+            ));
+        }
     }
 }
