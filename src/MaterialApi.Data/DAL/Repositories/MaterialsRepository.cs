@@ -20,7 +20,9 @@ namespace MaterialsApi.Data.DAL.Repositories
             .Include(m => m.Reviews)
             .Include(m => m.Type).ToListAsync();
 
-        public async Task<Material> GetByConditionWithMembersAsync(Expression<Func<Material, bool>> expression) => await _context.Materials
+        public async Task<Material> GetByConditionWithMembersAsync(Expression<Func<Material, bool>> expression) =>
+
+            await _context.Materials
             .Include(m => m.Author)
             .Include(m => m.Reviews)
             .Include(m => m.Type).SingleOrDefaultAsync(expression);

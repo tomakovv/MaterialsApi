@@ -10,6 +10,8 @@ namespace MaterialsApi.Mapper.Profiles
         {
             CreateMap<Review, ReviewDto>()
                   .ForMember(r => r.Material, opt => opt.MapFrom(x => x.Material.Title));
+            CreateMap<Review, AddReviewDto>();
+            CreateMap<AddReviewDto, Review>();
         }
     }
 }

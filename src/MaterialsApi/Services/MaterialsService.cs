@@ -7,14 +7,14 @@ using MaterialsApi.Services.Interfaces;
 
 namespace MaterialsApi.Services
 {
-    public class MeterialsService : IMeterialsService
+    public class MaterialsService : IMeterialsService
     {
         private readonly IMaterialsRepository _materialsRepository;
         private readonly IMaterialTypesRepository _materialTypesRepository;
         private readonly IAuthorRepository _authorRepository;
         private readonly IMapper _mapper;
 
-        public MeterialsService(IMaterialsRepository materialsRepository, IMapper mapper, IMaterialTypesRepository materialTypesRepository, IAuthorRepository authorRepository)
+        public MaterialsService(IMaterialsRepository materialsRepository, IMapper mapper, IMaterialTypesRepository materialTypesRepository, IAuthorRepository authorRepository)
         {
             _materialsRepository = materialsRepository;
             _materialTypesRepository = materialTypesRepository;
@@ -25,6 +25,7 @@ namespace MaterialsApi.Services
         public async Task<IEnumerable<MaterialDto>> GetAllAsync()
         {
             var materials = await _materialsRepository.GetAllWithMembersAsync();
+            var r = materials.Where(w => w.Reviews.Any(s => s.NumericRating > 2));
             return _mapper.Map<IEnumerable<MaterialDto>>(materials);
         }
 
@@ -69,7 +70,7 @@ namespace MaterialsApi.Services
             var material = await _materialsRepository.GetByConditionWithMembersAsync(m => m.Id == id);
             if (material == null)
                 throw new NotFoundException("Material with provided Id does not exist");
-            _materialsRepository.DeleteAsync(material);
+            await _materialsRepository.DeleteAsync(material);
         }
     }
 }

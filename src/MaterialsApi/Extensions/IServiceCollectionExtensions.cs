@@ -4,6 +4,7 @@ using MaterialsApi.Data.DAL.Repositories;
 using MaterialsApi.Services;
 using MaterialsApi.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace MaterialsApi.Extensions
 {
@@ -18,7 +19,10 @@ namespace MaterialsApi.Extensions
             services.AddScoped<IAuthorRepository, AuthorRepository>();
             services.AddScoped<IMaterialTypesRepository, MaterialTypesRepository>();
             services.AddScoped<IReviewsRepository, ReviewsRepository>();
-            services.AddScoped<IMeterialsService, MeterialsService>();
+            services.AddScoped<IMeterialsService, MaterialsService>();
+            services.AddScoped<IAuthorsService, AuthorsService>();
+            services.AddScoped<IMaterialTypesService, MaterialTypesService>();
+            services.AddScoped<IReviewService, ReviewService>();
         }
     }
 }

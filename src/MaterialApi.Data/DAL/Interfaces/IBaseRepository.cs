@@ -8,7 +8,7 @@ namespace MaterialsApi.Data.DAL.Interfaces
 
         Task DeleteAsync(T entity);
 
-        IQueryable<T> GetAllAsync();
+        IQueryable<T> GetAll();
 
         Task<T> GetSingleByConditionAsync(Expression<Func<T, bool>> expression);
 

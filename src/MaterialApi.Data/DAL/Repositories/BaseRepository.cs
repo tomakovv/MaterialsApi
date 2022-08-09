@@ -14,7 +14,7 @@ namespace MaterialsApi.Data.DAL.Repositories
             _context = context;
         }
 
-        public IQueryable<T> GetAllAsync() => _context.Set<T>().AsNoTracking();
+        public IQueryable<T> GetAll() => _context.Set<T>().AsNoTracking();
 
         public async Task<T> GetSingleByConditionAsync(Expression<Func<T, bool>> expression) => await _context.Set<T>().AsNoTracking().SingleOrDefaultAsync(expression);
 
