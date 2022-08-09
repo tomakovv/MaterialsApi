@@ -19,7 +19,11 @@ namespace MaterialsApi.Middlewares
             }
             catch (BadRequestException badRequestException)
             {
-                await HandleExceptionAsync(context, badRequestException, HttpStatusCode.BadRequest).ConfigureAwait(false);
+                await HandleExceptionAsync(context, badRequestException, HttpStatusCode.BadRequest);
+            }
+            catch (UnauthorizedAccessException unauthorizeAccessException)
+            {
+                await HandleExceptionAsync(context, unauthorizeAccessException, HttpStatusCode.Unauthorized);
             }
             catch (Exception exception)
             {

@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using Serilog;
 using System.Text;
 
 namespace MaterialsApi.Extensions
@@ -18,16 +17,6 @@ namespace MaterialsApi.Extensions
     {
         public static void AddCustomDbContext(this IServiceCollection services, IConfiguration configuration)
            => services.AddDbContext<MaterialsContext>(options => options.UseSqlServer(configuration["ConnectionString"]));
-
-        public static void AddCustomLogger(this ILoggingBuilder logging, IConfiguration configuration)
-        {
-            var logger = new LoggerConfiguration()
-              .ReadFrom.Configuration(configuration)
-               .Enrich.FromLogContext()
-               .CreateLogger();
-            logging.ClearProviders();
-            logging.AddSerilog(logger);
-        }
 
         public static void AddCustomServices(this IServiceCollection services)
         {
@@ -39,6 +28,7 @@ namespace MaterialsApi.Extensions
             services.AddScoped<IAuthorsService, AuthorsService>();
             services.AddScoped<IMaterialTypesService, MaterialTypesService>();
             services.AddScoped<IReviewService, ReviewService>();
+            services.AddScoped<IIdentityService, IdentityService>();
             services.AddIdentity<User, IdentityRole>()
                .AddEntityFrameworkStores<MaterialsContext>()
                .AddDefaultTokenProviders();
