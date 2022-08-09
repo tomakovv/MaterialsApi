@@ -23,13 +23,13 @@ namespace MaterialsApi.Middlewares
             }
             catch (Exception exception)
             {
-                _logger.LogError($"({DateTime.Now}) Unhandled Exception: {context.Request.Method}: {context.Request.Scheme}://{context.Request.Host}{context.Request.Path}\n\n{exception.Message}\n{exception}");
                 await HandleExceptionAsync(context, exception, HttpStatusCode.InternalServerError);
             }
         }
 
         private async Task HandleExceptionAsync(HttpContext context, Exception exception, HttpStatusCode statusCode)
         {
+            _logger.LogError($"errror message:{exception.Message} date:{DateTime.Now}");
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)statusCode;
             await context.Response.WriteAsJsonAsync(new { Error = exception.Message });

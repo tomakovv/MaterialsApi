@@ -5,6 +5,7 @@ using MaterialsApi.Services;
 using MaterialsApi.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Serilog;
 
 namespace MaterialsApi.Extensions
 {
@@ -12,6 +13,16 @@ namespace MaterialsApi.Extensions
     {
         public static void AddCustomDbContext(this IServiceCollection services, IConfiguration configuration)
            => services.AddDbContext<MaterialsContext>(options => options.UseSqlServer(configuration["ConnectionString"]));
+
+        public static void AddCustomLogger(this ILoggingBuilder logging, IConfiguration configuration)
+        {
+            var logger = new LoggerConfiguration()
+              .ReadFrom.Configuration(configuration)
+               .Enrich.FromLogContext()
+               .CreateLogger();
+            logging.ClearProviders();
+            logging.AddSerilog(logger);
+        }
 
         public static void AddCustomServices(this IServiceCollection services)
         {

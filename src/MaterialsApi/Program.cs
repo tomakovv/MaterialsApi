@@ -4,11 +4,12 @@ using MaterialsApi.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Logging.AddCustomLogger(builder.Configuration);
 builder.Services.AddScoped<ErrorMiddleware>();
 builder.Services.AddCustomDbContext(builder.Configuration);
 builder.Services.AddCustomServices();
 builder.Services.AddCustomCors();
-builder.Services.AddAutoMapper(typeof(MaterialsProfile), typeof(ReviewsProfile));
+builder.Services.AddAutoMapper(typeof(MaterialsProfile));
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
