@@ -3,6 +3,7 @@ using MaterialsApi.Data.DAL.Interfaces;
 using MaterialsApi.Data.Entities;
 using MaterialsApi.DTO.Reviews;
 using MaterialsApi.Exceptions;
+using MaterialsApi.Services.Interfaces;
 
 namespace MaterialsApi.Services
 {
@@ -11,18 +12,21 @@ namespace MaterialsApi.Services
         private readonly IReviewsRepository _reviewsRepository;
         private readonly IMaterialsRepository _materialsRepository;
         private readonly IMapper _mapper;
+        private readonly ILogger<ReviewService> _logger;
 
-        public ReviewService(IReviewsRepository authorRepository, IMapper mapper, IMaterialsRepository materialsRepository)
+        public ReviewService(IReviewsRepository authorRepository, IMapper mapper, IMaterialsRepository materialsRepository, ILogger<ReviewService> logger)
         {
             _reviewsRepository = authorRepository;
-            _mapper = mapper;
             _materialsRepository = materialsRepository;
+            _mapper = mapper;
+            _logger = logger;
         }
 
         public async Task<IEnumerable<ReviewDto>> GetAllAsync()
         {
-            var materials = await _reviewsRepository.GetAllWithMembersAsync();
-            return _mapper.Map<IEnumerable<ReviewDto>>(materials);
+            var reviews = await _reviewsRepository.GetAllWithMembersAsync();
+            _logger.LogInformation($"{reviews.Count()} items successfully fetched");
+            return _mapper.Map<IEnumerable<ReviewDto>>(reviews);
         }
 
         public async Task<ReviewDto> GetByIdAsync(int id)
@@ -30,6 +34,7 @@ namespace MaterialsApi.Services
             var review = await _reviewsRepository.GetByConditionWithMembersAsync(r => r.Id == id);
             if (review == null)
                 throw new NotFoundException("Review with provided Id does not exist");
+            _logger.LogInformation($"review with id: {id} successfully fetched");
             return _mapper.Map<ReviewDto>(review);
         }
 
@@ -41,6 +46,7 @@ namespace MaterialsApi.Services
                 throw new BadRequestException("Invalid material Id");
             var newReview = _mapper.Map<Review>(reviewDto);
             var addedReview = await _reviewsRepository.CreateAsync(newReview);
+            _logger.LogInformation($"new review added successfully ");
             return _mapper.Map<ReviewDto>(addedReview);
         }
 
@@ -55,6 +61,7 @@ namespace MaterialsApi.Services
                 throw new BadRequestException("Invalid material Id");
             var updatedReview = _mapper.Map(reviewDto, review);
             await _reviewsRepository.UpdateAsync(updatedReview);
+            _logger.LogInformation($"review updated successfully ");
         }
 
         public async Task DeleteAsync(int id)
@@ -63,6 +70,7 @@ namespace MaterialsApi.Services
             if (review == null)
                 throw new NotFoundException("Review with provided Id does not exist");
             await _reviewsRepository.DeleteAsync(review);
+            _logger.LogInformation($"review deleted successfully");
         }
     }
 }

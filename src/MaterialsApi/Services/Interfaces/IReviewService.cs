@@ -1,6 +1,6 @@
 ﻿using MaterialsApi.DTO.Reviews;
 
-namespace MaterialsApi.Services
+namespace MaterialsApi.Services.Interfaces
 {
     public interface IReviewService
     {

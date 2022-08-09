@@ -1,6 +1,6 @@
 ﻿using MaterialsApi.Data.Entities.Identity;
 using MaterialsApi.DTO.Reviews;
-using MaterialsApi.Services;
+using MaterialsApi.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;

@@ -26,6 +26,6 @@ namespace MaterialsApi.Controllers
         [SwaggerOperation(Summary = "Get all materials from specified material type")]
         [HttpGet("{id}/materials")]
         [Authorize(Roles = UserRoles.Admin)]
-        public async Task<IActionResult> GetAllAuthorMaterialsAsync(int id) => Ok(await _materialTypesService.GetAllMaterialsByTypeId(id));
+        public async Task<IActionResult> GetAllAuthorMaterialsAsync(int id) => Ok(await _materialTypesService.GetAllMaterialsByTypeIdAsync(id));
     }
 }

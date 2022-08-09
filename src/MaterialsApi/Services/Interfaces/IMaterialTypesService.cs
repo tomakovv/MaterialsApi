@@ -6,6 +6,6 @@ namespace MaterialsApi.Services.Interfaces
     public interface IMaterialTypesService
     {
         Task<IEnumerable<MaterialTypeDto>> GetAllAsync();
-        Task<IEnumerable<MaterialDto>> GetAllMaterialsByTypeId(int id);
+        Task<IEnumerable<MaterialDto>> GetAllMaterialsByTypeIdAsync(int id);
     }
 }
