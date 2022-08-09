@@ -78,7 +78,7 @@ namespace MaterialsApi.Controllers
         public async Task<IActionResult> Login(RegisterDto login)
         {
             var user = await _userManager.FindByNameAsync(login.Username);
-            if (user != null || await _userManager.CheckPasswordAsync(user, login.Password))
+            if (user != null && await _userManager.CheckPasswordAsync(user, login.Password))
             {
                 var claims = new List<Claim>
                 {

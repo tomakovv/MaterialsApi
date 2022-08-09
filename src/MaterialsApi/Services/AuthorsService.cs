@@ -39,6 +39,8 @@ namespace MaterialsApi.Services
         public async Task<IEnumerable<MaterialDto>> GetTopRatedMaterialsAsync(int authorId)
         {
             var author = await _authorRepository.GetSingleByParameterWithMembersAsync(a => a.Id == authorId);
+            if (author == null)
+                throw new NotFoundException("Author with provided Id does not exist");
             var materials = author.CreatedMaterials.Where(m => m.Reviews != null && m.Reviews.Any() && m.Reviews.Average(r => r.NumericRating) > 5).ToList();
             _logger.LogInformation($"top rated materials from author of id:{authorId} successfully fetched");
             return _mapper.Map<IEnumerable<MaterialDto>>(materials);

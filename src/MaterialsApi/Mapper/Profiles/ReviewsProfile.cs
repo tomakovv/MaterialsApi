@@ -9,7 +9,7 @@ namespace MaterialsApi.Mapper.Profiles
         public ReviewsProfile()
         {
             CreateMap<Review, ReviewDto>()
-                  .ForMember(r => r.Material, opt => opt.MapFrom(x => x.Material.Title));
+                  .ForMember(r => r.MaterialId, opt => opt.MapFrom(x => x.MaterialId));
             CreateMap<Review, AddReviewDto>();
             CreateMap<AddReviewDto, Review>();
         }
